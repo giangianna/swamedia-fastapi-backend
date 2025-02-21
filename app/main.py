@@ -13,4 +13,8 @@ app = FastAPI(title=settings.PROJECT_NAME,
             ],
         )
 
-app.include_router(v1_router, prefix="/api/v1", tags=["v1"])
+app.include_router(v1_router, prefix="/api/v1")
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to Swamedia Framework FastAPI!"}
