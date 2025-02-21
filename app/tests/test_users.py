@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 from app.main import app
-from app import crud, schemas
+from app.api.v1 import crud, schemas
 from app.db.session import SessionLocal
 from app.core.config import settings
 
@@ -11,8 +11,8 @@ def test_create_user():
     """
     Pengujian untuk membuat user baru.
     """
-    user_in = schemas.UserCreate(email="test@example.com", password="password")
-    response = client.post("/api/v1/users/", json=user_in.dict())
+    user_in = schemas.UserCreate(email="abcdddf123@example.com", password="password")
+    response = client.post("/api/v1/users/", json=user_in.model_dump())
     assert response.status_code == 200, response.text
     data = response.json()
     assert data["email"] == user_in.email
@@ -23,8 +23,8 @@ def test_read_user():
     """
     Pengujian untuk mendapatkan user berdasarkan email.
     """
-    user_in = schemas.UserCreate(email="test@example.com", password="password")
-    response = client.post("/api/v1/users/", json=user_in.dict())
+    user_in = schemas.UserCreate(email="adzfede12@example.com", password="password")
+    response = client.post("/api/v1/users/", json=user_in.model_dump())
     assert response.status_code == 200, response.text
     data = response.json()
     user_id = data["id"]

@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 
 # Schema dasar untuk users
 class UserBase(BaseModel):
@@ -13,5 +13,4 @@ class User(UserBase):
     id: int
     is_active: bool
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
