@@ -4,9 +4,13 @@ from app import crud, schemas
 from app.db.session import SessionLocal
 from app.core.config import settings
 
+# Membuat klien tes FastAPI
 client = TestClient(app)
 
 def test_create_user():
+    """
+    Pengujian untuk membuat user baru.
+    """
     user_in = schemas.UserCreate(email="test@example.com", password="password")
     response = client.post("/api/v1/users/", json=user_in.dict())
     assert response.status_code == 200, response.text
@@ -16,6 +20,9 @@ def test_create_user():
     assert "is_active" in data
 
 def test_read_user():
+    """
+    Pengujian untuk mendapatkan user berdasarkan email.
+    """
     user_in = schemas.UserCreate(email="test@example.com", password="password")
     response = client.post("/api/v1/users/", json=user_in.dict())
     assert response.status_code == 200, response.text
